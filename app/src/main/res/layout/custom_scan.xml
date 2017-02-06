@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zxing_result_view"
+    android:orientation="vertical">
+
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/zxing_barcode_scanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:zxing_preview_scaling_strategy="fitXY"
+        app:zxing_use_texture_view="false" />
+
+    <ImageView
+        android:id="@+id/iv_light"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/light_img" />
+
+</RelativeLayout>

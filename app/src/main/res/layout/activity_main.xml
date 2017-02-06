@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="example.zxing.MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lib包的acitivity"
+        android:onClick="scanBarcode"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义acitivity"
+        android:onClick="scanBarcodeCustomOptions"/>
+
+
+    <fragment
+        android:tag="scan_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="example.zxing.MainActivity$ScanFragment"
+        tools:layout="@layout/fragment_scan" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="打开带fragment识别"
+        android:onClick="sanForFragment"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="二维码生成"
+        android:onClick="qrcodePic"/>
+</LinearLayout>
