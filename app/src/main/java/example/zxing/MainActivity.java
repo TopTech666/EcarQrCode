@@ -3,26 +3,17 @@ package example.zxing;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Looper;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.google.zxing.Result;
 import com.google.zxing.integration.android.IntentIntegrator;
-import com.util.QrUtil;
 
 import example.zxing.ForAcitivity.mCaptureCustomActivity;
 import example.zxing.ForFragment.mCaptureFragmentActivity;
-import example.zxing.RecogQRcodePic.QrCodeMainActivity;
-
-import static com.google.zxing.integration.android.IntentIntegrator.REQUEST_CODE;
+import example.zxing.DecodEncode.QrCodeMainActivity;
 
 
 public class MainActivity extends Activity {

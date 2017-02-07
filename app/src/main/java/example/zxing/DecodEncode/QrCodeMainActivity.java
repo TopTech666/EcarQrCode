@@ -1,17 +1,21 @@
-package example.zxing.RecogQRcodePic;
+package example.zxing.DecodEncode;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.zxing.Result;
 import com.util.QrUtil;
 
 import java.util.ArrayList;
 
+import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 import example.zxing.R;
 import qrcode.ecar.com.albumlib.PickOrTakeImageActivity;
 
@@ -30,16 +34,34 @@ public class QrCodeMainActivity extends Activity {
      * 返回的图片的信息  列表
      */
     ArrayList<String> picklist = new ArrayList<String>();
+    private EditText editText;
+    private ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qrcode_main);
+        editText = (EditText) findViewById(R.id.et_qrcode);
+        imageView = (ImageView) findViewById(R.id.iv_qrcode);
     }
-    public void  openAlbum(View view){
+
+    //打开相册
+    public void openAlbum(View view) {
 
 //        QrUtil.openAlbum(this);
-        startActivityForResult(new Intent(this, PickOrTakeImageActivity.class),REQUEST_CODE);
+        startActivityForResult(new Intent(this, PickOrTakeImageActivity.class), REQUEST_CODE);
     }
+
+    //生成二维码
+    public void encode(View view) {
+        if (TextUtils.isEmpty(editText.getText().toString())) {
+            Toast.makeText(this, "请输入二维码内容", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Bitmap bitmap = QrUtil.createQrCode(editText.getText().toString(), 1000);
+        imageView.setImageBitmap(bitmap);
+    }
+
     //相册回调 识别二维码
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -47,8 +69,8 @@ public class QrCodeMainActivity extends Activity {
 
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE) {
-                picklist= data.getStringArrayListExtra("data");
-                final String photo_path= picklist.get(0);
+                picklist = data.getStringArrayListExtra("data");
+                final String photo_path = picklist.get(0);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -61,13 +83,13 @@ public class QrCodeMainActivity extends Activity {
                                     .show();
                             Looper.loop();
                         } else {
-                            String recode = result.toString();
+                            String recode = QrUtil.recode(result.toString());
 //                            Intent data = new Intent();
 //                            data.putExtra("result", recode);
 //                            setResult(300, data);
 //                            finish();
                             Looper.prepare();
-                            Toast.makeText(getApplicationContext(), "结果："+recode, Toast.LENGTH_SHORT)
+                            Toast.makeText(getApplicationContext(), "结果：" + recode, Toast.LENGTH_SHORT)
                                     .show();
                             Looper.loop();
 
